@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Friendfinder Survey</title>
-
+  <!-- <script src="app.js"></script>  -->
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script
@@ -23,8 +23,8 @@
       <br>
 
       <div class="text-center">
-        <a href="/tables"><button class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list-alt"></span> View Tables</button></a>
-        <a href="/reserve"><button class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Make Reservation</button></a>
+        <a href="/survey"><button class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Match Up</button></a>
+        <a href="/reserve"><button class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> See all Friends!</button></a>
       </div>
 
     </div>
@@ -63,6 +63,46 @@
                 <input type="text" class="form-control" id="question2">
               </div>
 
+              <div class="form-group">
+                <label for="question3">question3</label>
+                <input type="text" class="form-control" id="question3">
+              </div>
+
+              <div class="form-group">
+                <label for="question4">question4</label>
+                <input type="text" class="form-control" id="question4">
+              </div>
+
+              <div class="form-group">
+                <label for="question5">question5</label>
+                <input type="text" class="form-control" id="question5">
+              </div>
+
+              <div class="form-group">
+                <label for="question6">question6</label>
+                <input type="text" class="form-control" id="question6">
+              </div>
+
+              <div class="form-group">
+                <label for="question7">question7</label>
+                <input type="text" class="form-control" id="question7">
+              </div>
+
+              <div class="form-group">
+                <label for="question8">question8</label>
+                <input type="text" class="form-control" id="question8">
+              </div>
+
+              <div class="form-group">
+                <label for="question9">question9</label>
+                <input type="text" class="form-control" id="question9">
+              </div>
+
+              <div class="form-group">
+                <label for="question10">question10</label>
+                <input type="text" class="form-control" id="question10">
+              </div>
+
               <button id="submitButton" type="submit" class="btn btn-primary submit">Submit</button>
             </form>
 
@@ -70,6 +110,21 @@
         </div>
 
         </div>
+
+
+        <div id="finalModal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">Your best match!</h2> 
+              </div>
+              <div class="modal-body">
+                <h2 id="matchName"></h2>
+                <img id="matchImg" src="" alt="">
+              </div>
+           </div>
+          </div>
         </div>
 
     <footer class="footer">
@@ -79,8 +134,7 @@
     </footer>
 
   </div>
-
-<!-- <script type="application/javascript" src="./app.js"></script>  -->
+</div>
 
 <script type="text/javascript">
 
@@ -92,14 +146,27 @@
         photo: $('#userPhoto').val().trim(),
         score: [
             $('#question1').val().trim(),
-            $('#question2').val().trim()
+            $('#question2').val().trim(),
+            $('#question3').val().trim(),
+            $('#question4').val().trim(),
+            $('#question5').val().trim(),
+            $('#question6').val().trim(),
+            $('#question7').val().trim(),
+            $('#question8').val().trim(),
+            $('#question9').val().trim(),
+            $('#question10').val().trim()
         ]
     };
 
     console.log(JSON.stringify(userInput))
 
-    $.post("/api/friends", userInput, function(data) {
-      $('#test').text(data.name)
+    $.post("/api/friends", userInput)
+    .done(function(data) {
+      console.log('data:', data);
+      $('#matchName').text(data.name);
+      $('#matchImg').attr("src", data.photo);
+      $('#finalModal').modal('show');
+
 });
 });
 

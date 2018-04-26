@@ -1,3 +1,5 @@
+
+
 var friendData = require("../data/friends.json");
 
 //ROUTING
@@ -10,20 +12,49 @@ module.exports = function(app) {
 
     app.post('/api/friends', function(req, res) {
         var userData = req.body;
-        arrayDiff();
-    })
-}
+        var sumDiff = 0;
+        var scoresDiff = [];
+        var totalDiff = [];
 
-function arrayDIff(friend1, friend2) {
-    var diff = [];
+        var match = {
+            name: '',
+            photo: '',
+            difference: 100
+        }
 
     for (var i=0; i<friendData.length; i++) {
         
-        for (var j=0; j<friendData.scores.length; j++) {
-        var totalDiff =+ Math.abs(friendData[i].scores[j] - friendData[i].scores[j]);
-        }
+        for (var j=0; j<friendData[i].scores.length; j++) {
+        var diff = Math.abs(parseInt(userData.score[j]) - parseInt(friendData[i].scores[j]));
+        scoresDiff.push(diff);
+            if (scoresDiff.length === friendData[i].scores.length) {
+                sumDiff = scoresDiff.reduce(sum, 0);
+                
+                function sum(a, b) {
+                        return a+b;
+                    } 
+                
+                totalDiff.push(sumDiff);
+                if (sumDiff < match.difference) {
+                    match.name = friendData[i].name;
+                    match.photo = friendData[i].photo;
+                    match.difference = sumDiff;
+                    
+                }
+                scoresDiff = [];
+                sumDiff = 0;
+                
+                 
+                }
+            
+            
+            }
+        
         console.log('totalDiff ='+totalDiff)
-        diff.push(totalDiff);
-        console.log(diff)
+        console.log(`Your best match is...${match.name} 
+    Object: ${JSON.stringify(match)}`)
     }
+    res.json(match)
+    // friendData.push(userData);
+})
 }

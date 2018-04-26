@@ -10,5 +10,5 @@ $('#submitButton').on('click', function(event) {
         ]
     };
 
-    console.log(JSON.stringify(userInput))
+    console.log("I am in app.js and userdata: "+JSON.stringify(userInput))
 })
