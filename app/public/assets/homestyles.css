@@ -1,0 +1,30 @@
+.modal-header {
+    text-align: center;
+    display: block;
+}
+
+.modal-content {
+   
+    background-color: white;
+    text-align: center;
+    
+}
+
+.jumbotron {
+    background: rgba(255, 255, 255, 0); 
+}
+
+body {
+    background-image: url("https://images.pexels.com/photos/708440/pexels-photo-708440.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}
+
+footer {
+    color: rgb(0, 0, 0);
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+}
+
