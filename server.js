@@ -9,10 +9,10 @@ var path = require("path");
 var app = express();
 
 //Set initial port; process.env.PORT for Heroku
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
 
 //Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './app/public')));
 
 //Set up Express app to handle data parsing 
 app.use(bodyParser.urlencoded({ extended: true}));
