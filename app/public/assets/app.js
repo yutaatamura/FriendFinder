@@ -2,10 +2,15 @@ $(document).ready(function() {
   $('#submitButton').on('click', function(event) {
     event.preventDefault();
 
+    if ($('#userName').val().trim() === "" || $('#userPhoto').val().trim() === "") {
+        alert("Please make sure to fill out all fields.");
+        return;
+    }
+
     var userInput = {
         name: $('#userName').val().trim(),
         photo: $('#userPhoto').val().trim(),
-        score: [
+        scores: [
             $('#question1').val().trim(),
             $('#question2').val().trim(),
             $('#question3').val().trim(),
